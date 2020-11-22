@@ -1,0 +1,10 @@
+/*
+!.gitignore
+!/src
+!premake5.lua
+!PremakeScript.bat
+!README.md
+!LICENSE.txt
+*.vcxproj
+*.filters
+*.user
