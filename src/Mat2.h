@@ -68,20 +68,4 @@ namespace Math {
 
     };
 
-    struct MatrixException : public std::runtime_error {
-
-        MatrixException(const std::string& message) : std::runtime_error(message) {}
-
-        MatrixException(const char* message) : std::runtime_error(message) {}
-
-    };
-
-    struct MatrixNotInvertibleException : public MatrixException {
-        MatrixNotInvertibleException() : MatrixException("Matrix is not invertible") {}
-    };
-
-    struct ImaginarySolutionsException : public MatrixException {
-        ImaginarySolutionsException() : MatrixException("Imaginary solutions are not supported yet") {}
-    };
-
 }

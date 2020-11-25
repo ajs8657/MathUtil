@@ -115,7 +115,7 @@ namespace Math {
     Mat3<T> Mat3<T>::Inverse() const {
         auto det = a * (e * i - f * h) - b * (d * i - f * g) + c * (d * h - e * g);
         if (det == 0) {
-            throw MatrixNotInvertibleException();
+            throw MatrixException(MatrixException::NOT_INVERTIBLE);
         }
         return Mat3<T>(
             (e * other.i - f * other.h) / det, (c * other.h - b * other.i) / det, (b * other.f - c * other.e) / det,
@@ -127,7 +127,7 @@ namespace Math {
     Vec3<T> Mat3<T>::Solve(const Vec3<T>& bVec) const {
         auto det = a * (e * i - f * h) - b * (d * i - f * g) + c * (d * h - e * g);
         if (det == 0) {
-            throw MatrixNotInvertibleException();
+            throw MatrixException(MatrixException::NOT_INVERTIBLE);
         }
         auto xOverDet = bVec.x / det;
         auto yOverDet = bVec.y / det;

@@ -1,5 +1,6 @@
 #include "Vec2.h"
 
+#include "Exception/VectorException.h"
 #include <cmath>
 
 namespace Math {
@@ -40,6 +41,9 @@ namespace Math {
     template<typename T>
     Vec2<T> Vec2<T>::Normalize() const {
         auto magnitude = sqrt(x * x + y * y);
+        if (magnitude == 0) {
+            throw VectorException(VectorException::NORMALIZE_ZERO);
+        }
         return Vec2<T>(x / magnitude, y / magnitude);
     }
 
@@ -83,6 +87,9 @@ namespace Math {
     template<typename T>
     Vec2<T> Vec2<T>::Normalize() {
         auto magnitude = sqrt(x * x + y * y);
+        if (magnitude == 0) {
+            throw VectorException(VectorException::NORMALIZE_ZERO);
+        }
         x /= magnitude;
         y /= magnitude;
         return *this;
@@ -95,6 +102,9 @@ namespace Math {
         auto newX = other.x - x;
         auto newY = other.y - y;
         auto magnitude = sqrt(newX * newX + newY * newY);
+        if (magnitude == 0) {
+            throw VectorException(VectorException::NORMALIZE_ZERO);
+        }
         newX /= magnitude;
         newY /= magnitude;
         return Vec2<T>(newX, newY);
@@ -104,16 +114,14 @@ namespace Math {
     T Vec2<T>::DistanceTo(const Vec2<T>& other) const {
         auto dx = other.x - x;
         auto dy = other.y - y;
-        auto distSqr = dx * dx + dy * dy;
-        return sqrt(distSqr);
+        return sqrt(dx * dx + dy * dy);
     }
 
     template<typename T>
     T Vec2<T>::DistanceSqrTo(const Vec2<T>& other) const {
         auto dx = other.x - x;
         auto dy = other.y - y;
-        auto distSqr = dx * dx + dy * dy;
-        return distSqr;
+        return dx * dx + dy * dy;
     }
 
 }

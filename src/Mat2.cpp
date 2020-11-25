@@ -1,5 +1,7 @@
 #include "Mat2.h"
 
+#include "Exception/MatrixException.h"
+
 namespace Math {
 
     template<typename T>
@@ -79,7 +81,7 @@ namespace Math {
     Mat2<T> Mat2<T>::Inverse() const {
         auto det = a * d - b * c;
         if (det == 0) {
-            throw MatrixNotInvertibleException();
+            throw MatrixException(MatrixException::NOT_INVERTIBLE);
         }
         return Mat2<T>(
             d / det,
@@ -92,7 +94,7 @@ namespace Math {
     Vec2<T> Mat2<T>::Solve(const Vec2<T>& bVec) const {
         auto det = a * d - b * c;
         if (det == 0) {
-            throw MatrixNotInvertibleException();
+            throw MatrixException(MatrixException::NOT_INVERTIBLE);
         }
         auto xOverDet = bVec.x / det;
         auto yOverDet = bVec.y / det;

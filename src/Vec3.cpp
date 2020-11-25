@@ -40,6 +40,9 @@ namespace Math {
     template<typename T>
     Vec3<T> Vec3<T>::Normalize() const {
         auto magnitude = sqrt(x * x + y * y + z * z);
+        if (magnitude == 0) {
+            throw VectorException(VectorException::NORMALIZE_ZERO);
+        }
         return Vec3<T>(x / magnitude, y / magnitude, z / magnitude);
     }
 
@@ -88,6 +91,9 @@ namespace Math {
     template<typename T>
     Vec3<T> Vec3<T>::Normalize() {
         auto magnitude = sqrt(x * x + y * y + z * z);
+        if (magnitude == 0) {
+            throw VectorException(VectorException::NORMALIZE_ZERO);
+        }
         x /= magnitude;
         y /= magnitude;
         z /= magnitude;
@@ -102,6 +108,9 @@ namespace Math {
         auto newY = other.y - y;
         auto newZ = other.z - z;
         auto magnitude = sqrt(newX * newX + newY * newY + newZ * newZ);
+        if (magnitude == 0) {
+            throw VectorException(VectorError::NORMALIZE_ZERO);
+        }
         newX /= magnitude;
         newY /= magnitude;
         newZ /= magnitude;
@@ -113,8 +122,7 @@ namespace Math {
         auto dx = other.x - x;
         auto dy = other.y - y;
         auto dz = other.z - z;
-        auto distSqr = dx * dx + dy * dy + dz * dz;
-        return sqrt(distSqr);
+        return sqrt(dx * dx + dy * dy + dz * dz);
     }
 
     template<typename T>
@@ -122,8 +130,7 @@ namespace Math {
         auto dx = other.x - x;
         auto dy = other.y - y;
         auto dz = other.z - z;
-        auto distSqr = dx * dx + dy * dy + dz * dz;
-        return distSqr;
+        return dx * dx + dy * dy + dz * dz;
     }
 
 }
