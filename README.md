@@ -1,6 +1,6 @@
-# Universe
+# MathUtil
 
-This is a gravity simulator or something
+This is a math library currently containing Vec2, Vec3, Vec, Mat2, and Mat3 classes
 
 ## License
 
