@@ -1,10 +1,16 @@
+# Ignore everything
 /*
+
+# Unignore these directories
 !.gitignore
 !/src
-!premake5.lua
-!PremakeScript.bat
+
+# Unignore these files
 !README.md
 !LICENSE.txt
+!CMakeLists.txt
+
+# Reignore these files
 *.vcxproj
 *.filters
 *.user
