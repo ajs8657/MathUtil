@@ -1,17 +1,14 @@
 #pragma once
 
 #include "MathException.h"
+#include "MatrixError.h"
 
-namespace MathUtil {
-
-    enum class MatrixError {
-        NOT_INVERTIBLE,
-        UNSPECIFIED
-    };
+namespace Math {
 
     class MatrixException : public MathException {
 
     public:
+
 
         MatrixException(const char* message) : MathException(message) {}
 
@@ -21,7 +18,7 @@ namespace MathUtil {
 
     private:
 
-        char* ErrorToString(const MatrixError& error) {
+        std::string ErrorToString(const MatrixError& error) {
 
             switch (error) {
             case MatrixError::NOT_INVERTIBLE:

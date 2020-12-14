@@ -1,11 +1,10 @@
 # CMakeList.txt: CMake project
-# include source and define project specific logic here
 
 # Minimum CMake Version
 cmake_minimum_required (VERSION 3.8)
 
 # Project Name
-project ("MathUtil")
+project("MathUtil")
 
 # Create a list of source files
 set(SRC_DIR "src")
@@ -16,4 +15,4 @@ add_library(MathUtil ${SRC})
 
 # Make sure the compiler can find include files for our library
 # when other libraries or executables link to Hello
-target_include_directories (MathUtil PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+target_include_directories(MathUtil PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

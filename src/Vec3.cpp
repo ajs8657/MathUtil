@@ -1,5 +1,6 @@
 #include "Vec3.h"
 
+#include "Exception/VectorException.h"
 #include <cmath>
 
 namespace Math {
@@ -41,7 +42,7 @@ namespace Math {
     Vec3<T> Vec3<T>::Normalize() const {
         auto magnitude = sqrt(x * x + y * y + z * z);
         if (magnitude == 0) {
-            throw VectorException(VectorException::NORMALIZE_ZERO);
+            throw VectorException(VectorError::NORMALIZE_ZERO);
         }
         return Vec3<T>(x / magnitude, y / magnitude, z / magnitude);
     }
@@ -92,7 +93,7 @@ namespace Math {
     Vec3<T> Vec3<T>::Normalize() {
         auto magnitude = sqrt(x * x + y * y + z * z);
         if (magnitude == 0) {
-            throw VectorException(VectorException::NORMALIZE_ZERO);
+            throw VectorException(VectorError::NORMALIZE_ZERO);
         }
         x /= magnitude;
         y /= magnitude;

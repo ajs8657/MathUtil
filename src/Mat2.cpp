@@ -81,7 +81,7 @@ namespace Math {
     Mat2<T> Mat2<T>::Inverse() const {
         auto det = a * d - b * c;
         if (det == 0) {
-            throw MatrixException(MatrixException::NOT_INVERTIBLE);
+            throw MatrixException(MatrixError::NOT_INVERTIBLE);
         }
         return Mat2<T>(
             d / det,
@@ -94,7 +94,7 @@ namespace Math {
     Vec2<T> Mat2<T>::Solve(const Vec2<T>& bVec) const {
         auto det = a * d - b * c;
         if (det == 0) {
-            throw MatrixException(MatrixException::NOT_INVERTIBLE);
+            throw MatrixException(MatrixError::NOT_INVERTIBLE);
         }
         auto xOverDet = bVec.x / det;
         auto yOverDet = bVec.y / det;

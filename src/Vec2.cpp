@@ -42,7 +42,7 @@ namespace Math {
     Vec2<T> Vec2<T>::Normalize() const {
         auto magnitude = sqrt(x * x + y * y);
         if (magnitude == 0) {
-            throw VectorException(VectorException::NORMALIZE_ZERO);
+            throw VectorException(VectorError::NORMALIZE_ZERO);
         }
         return Vec2<T>(x / magnitude, y / magnitude);
     }
@@ -88,7 +88,7 @@ namespace Math {
     Vec2<T> Vec2<T>::Normalize() {
         auto magnitude = sqrt(x * x + y * y);
         if (magnitude == 0) {
-            throw VectorException(VectorException::NORMALIZE_ZERO);
+            throw VectorException(VectorError::NORMALIZE_ZERO);
         }
         x /= magnitude;
         y /= magnitude;
@@ -103,7 +103,7 @@ namespace Math {
         auto newY = other.y - y;
         auto magnitude = sqrt(newX * newX + newY * newY);
         if (magnitude == 0) {
-            throw VectorException(VectorException::NORMALIZE_ZERO);
+            throw VectorException(VectorError::NORMALIZE_ZERO);
         }
         newX /= magnitude;
         newY /= magnitude;

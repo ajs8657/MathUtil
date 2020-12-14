@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include <string>
 
-namespace MathUtil {
+namespace Math {
 
     class MathException : public std::runtime_error {
 

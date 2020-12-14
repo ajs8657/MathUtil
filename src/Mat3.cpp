@@ -1,5 +1,7 @@
 #include "Mat3.h"
 
+#include "Exception/MatrixException.h"
+
 namespace Math {
 
     template<typename T>
@@ -115,27 +117,27 @@ namespace Math {
     Mat3<T> Mat3<T>::Inverse() const {
         auto det = a * (e * i - f * h) - b * (d * i - f * g) + c * (d * h - e * g);
         if (det == 0) {
-            throw MatrixException(MatrixException::NOT_INVERTIBLE);
+            throw MatrixException(MatrixError::NOT_INVERTIBLE);
         }
         return Mat3<T>(
-            (e * other.i - f * other.h) / det, (c * other.h - b * other.i) / det, (b * other.f - c * other.e) / det,
-            (f * other.g - d * other.i) / det, (a * other.i - c * other.g) / det, (c * other.d - a * other.f) / det,
-            (d * other.h - e * other.g) / det, (b * other.g - a * other.h) / det, (a * other.e - b * other.d) / det);
+            (e * i - f * h) / det, (c * h - b * i) / det, (b * f - c * e) / det,
+            (f * g - d * i) / det, (a * i - c * g) / det, (c * d - a * f) / det,
+            (d * h - e * g) / det, (b * g - a * h) / det, (a * e - b * d) / det);
     }
 
     template<typename T>
     Vec3<T> Mat3<T>::Solve(const Vec3<T>& bVec) const {
         auto det = a * (e * i - f * h) - b * (d * i - f * g) + c * (d * h - e * g);
         if (det == 0) {
-            throw MatrixException(MatrixException::NOT_INVERTIBLE);
+            throw MatrixException(MatrixError::NOT_INVERTIBLE);
         }
         auto xOverDet = bVec.x / det;
         auto yOverDet = bVec.y / det;
         auto zOverDet = bVec.z / det;
         return Vec3<T>(
-            ((e * other.i - f * other.h) * xOverDet) + ((c * other.h - b * other.i) * yOverDet) + ((b * other.f - c * other.e) * zOverDet),
-            ((f * other.g - d * other.i) * xOverDet) + ((a * other.i - c * other.g) * yOverDet) + ((c * other.d - a * other.f) * zOverDet),
-            ((d * other.h - e * other.g) * xOverDet) + ((b * other.g - a * other.h) * yOverDet) + ((a * other.e - b * other.d) * zOverDet));
+            ((e * i - f * h) * xOverDet) + ((c * h - b * i) * yOverDet) + ((b * f - c * e) * zOverDet),
+            ((f * g - d * i) * xOverDet) + ((a * i - c * g) * yOverDet) + ((c * d - a * f) * zOverDet),
+            ((d * h - e * g) * xOverDet) + ((b * g - a * h) * yOverDet) + ((a * e - b * d) * zOverDet));
     }
 
 }

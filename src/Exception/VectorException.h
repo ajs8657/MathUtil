@@ -1,14 +1,9 @@
 #pragma once
 
 #include "MathException.h"
+#include "VectorError.h"
 
-namespace MathUtil {
-
-    enum class VectorError {
-        NORMALIZE_ZERO,
-        SIZE_MISMATCH,
-        UNSPECIFIED
-    };
+namespace Math {
 
     class VectorException : public MathException {
 
@@ -22,7 +17,7 @@ namespace MathUtil {
 
     private:
 
-        char* ErrorToString(const VectorError& error) {
+        std::string ErrorToString(const VectorError& error) {
             switch (error) {
             case VectorError::NORMALIZE_ZERO:
                 return "Cannot normalize the zero vector";
