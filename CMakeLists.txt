@@ -15,4 +15,4 @@ add_library(${PROJECT_NAME} ${SRC})
 
 # Make sure the compiler can find include files for our library
 # when other libraries or executables link to this one
-# target_include_directories(${PROJECT_NAME} PUBLIC ${SRC_DIR})
+target_include_directories(${PROJECT_NAME} PUBLIC ${SRC_DIR})
