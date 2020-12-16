@@ -9,24 +9,22 @@
 
 namespace Math {
 
-    template <typename T, size_t _Size>
+    template <typename T, size_t Size>
     class Vec {
 
     public:
-
-        const size_t Size;
 
         // Empty constructor
         Vec() = delete;
 
         // Default constructor
-        Vec(T values...);
+        Vec(T values...) : Size(Size), values(values) {}
 
         // Initialization constructor
-        Vec(std::initializer_list<T> values);
+        Vec(std::initializer_list<T> values) : Size(Size), values(values) {}
 
         // Copy constructor
-        Vec(const Vec<T, _Size>& other) = default;
+        Vec(const Vec<T, Size>& other) = default;
 
         // Move contstructor
         Vec(Vec&& other) = default;
@@ -35,240 +33,169 @@ namespace Math {
         ~Vec() = default;
 
         // Const Move by vector
-        Vec<T, _Size> Move(const Vec<T, _Size>& other) const;
+        Vec<T, Size> Move(const Vec<T, Size>& other) const {
+            std::vector<T> result(this->values);
+            for (uint32_t index = 0; index < Size; index++) {
+                result[index] += other[index];
+            }
+            return Vec<T, Size>(result);
+        }
 
         // Const Move by values
-        Vec<T, _Size> Move(T values...) const;
+        Vec<T, Size> Move(T values...) const {
+            std::vector<T> result(this->values);
+            for (uint32_t index = 0; index < Size; index++) {
+                result[index] += values[index];
+            }
+            return Vec<T, Size>(result);
+        }
 
         // Const Scale by vector
-        Vec<T, _Size> Scale(const Vec<T, _Size>& other) const;
+        Vec<T, Size> Scale(const Vec<T, Size>& other) const {
+            std::vector<T> result(this->values);
+            for (uint32_t index = 0; index < Size; index++) {
+                result[index] *= other[index];
+            }
+            return Vec<T, Size>(result);
+        }
 
         // Const Scale by values
-        Vec<T, _Size> Scale(T values...) const;
+        Vec<T, Size> Scale(T values...) const {
+            std::vector<T> result(this->values);
+            for (uint32_t index = 0; index < Size; index++) {
+                result[index] *= values[index];
+            }
+            return Vec<T, Size>(result);
+        }
 
         // Const Scale by one value
-        Vec<T, _Size> Scale(T scalar) const;
+        Vec<T, Size> Scale(T scalar) const {
+            std::vector<T> result(this->values);
+            for (uint32_t index = 0; index < Size; index++) {
+                result[index] *= scalar;
+            }
+            return Vec<T, Size>(result);
+        }
 
         // Const Normalize
-        Vec<T, _Size> Normalize() const;
+        Vec<T, Size> Normalize() const {
+            T magnitude = T(0);
+            for (T value : values) {
+                magnitude += value * value;
+            }
+            magnitude = sqrt(magnitude);
+            if (magnitude == T(0)) {
+                throw VectorException(VectorError::NORMALIZE_ZERO);
+            }
+            std::vector<T> result(this->values);
+            for (uint32_t index = 0; index < Size; index++) {
+                result[index] /= magnitude;
+            }
+            return Vec<T, Size>(result);
+        }
 
 
         // Mutator Move by vector
-        Vec<T, _Size> Move(const Vec<T, _Size>& other);
+        Vec<T, Size> Move(const Vec<T, Size>& other) {
+            for (uint32_t index = 0; index < Size; index++) {
+                this->values[index] += other[index];
+            }
+            return *this;
+        }
 
         // Mutator Move by values
-        Vec<T, _Size> Move(T values...);
+        Vec<T, Size> Move(T values...) {
+            for (uint32_t index = 0; index < Size; index++) {
+                this->values[index] += values[index];
+            }
+            return *this;
+        }
 
         // Mutator Scale by vector
-        Vec<T, _Size> Scale(const Vec<T, _Size>& other);
+        Vec<T, Size> Scale(const Vec<T, Size>& other) {
+            for (uint32_t index = 0; index < Size; index++) {
+                this->values[index] *= other[index];
+            }
+            return *this;
+        }
 
         // Mutator Scale by values
-        Vec<T, _Size> Scale(T values...);
+        Vec<T, Size> Scale(T values...) {
+            for (uint32_t index = 0; index < Size; index++) {
+                this->values[index] *= values[index];
+            }
+            return *this;
+        }
 
         // Mutator Scale by one value
-        Vec<T, _Size> Scale(T scalar);
+        Vec<T, Size> Scale(T scalar) {
+            for (uint32_t index = 0; index < Size; index++) {
+                this->values[index] *= scalar;
+            }
+            return *this;
+        }
 
         // Mutator Normalize
-        Vec<T, _Size> Normalize();
+        Vec<T, Size> Normalize() {
+            T magnitude = T(0);
+            for (T value : values) {
+                magnitude += value * value;
+            }
+            magnitude = sqrt(magnitude);
+            if (magnitude == T(0)) {
+                throw VectorException(VectorError::NORMALIZE_ZERO);
+            }
+            for (T& value : values) {
+                value /= magnitude;
+            }
+            return *this;
+        }
 
 
         // Get normalized direction to another vector
-        Vec<T, _Size> DirectionTo(const Vec<T, _Size>& other) const;
+        Vec<T, Size> DirectionTo(const Vec<T, Size>& other) const {
+            std::vector<T> result(this->values);
+            for (uint32_t index = 0; index < Size; index++) {
+                result[index] = other[index] - values[index];
+            }
+            return Vec<T, Size>(result);
+        }
+
+        // Get the euclidean distance to the origin
+        T Magnitude() const {
+            T magnitude = T(0);
+            for (T value : values) {
+                magnitude += value * value;
+            }
+            return sqrt(magnitude);
+        }
 
         // Get the euclidean distance to another vector
-        T DistanceTo(const Vec<T, _Size>& other) const;
+        T DistanceTo(const Vec<T, Size>& other) const {
+            T distSqr = 0;
+            for (uint32_t index = 0; index < Size; index++) {
+                T difference = other[index] - values[index];
+                distSqr += difference * difference;
+            }
+            return sqrt(distSqr);
+        }
 
         // Get the euclidean distance squared to another vector
-        T DistanceSqrTo(const Vec<T, _Size>& other) const;
+        T DistanceSqrTo(const Vec<T, Size>& other) const {
+            T distSqr = 0;
+            for (uint32_t index = 0; index < Size; index++) {
+                T difference = other[index] - values[index];
+                distSqr += difference * difference;
+            }
+            return distSqr;
+        }
 
         inline T operator[] (int index) { return values[index]; }
 
     private:
 
-        std::array<T, _Size> values;
+        std::array<T, Size> values;
 
     };
-
-    template<typename T, size_t _Size>
-    Vec<T, _Size>::Vec(T values...) : Size(_Size), values(values) {}
-
-    template<typename T, size_t _Size>
-    Vec<T, _Size>::Vec(std::initializer_list<T> values) : Size(_Size), values(values) {}
-
-    template<typename T, size_t _Size>
-    Vec<T, _Size> Vec<T, _Size>::Move(const Vec<T, _Size>& other) const {
-        if (Size != other.Size) {
-            throw VectorException(VectorError::SIZE_MISMATCH);
-        }
-        std::vector<T> result(this->values);
-        for (uint32_t index = 0; index < Size; index++) {
-            result[index] += other[index];
-        }
-        return Vec<T, _Size>(result);
-    }
-
-    template<typename T, size_t _Size>
-    Vec<T, _Size> Vec<T, _Size>::Move(T values...) const {
-        if (Size != sizeof(values) / sizeof(T)) {
-            throw VectorException(VectorError::SIZE_MISMATCH);
-        }
-        std::vector<T> result(this->values);
-        for (uint32_t index = 0; index < Size; index++) {
-            result[index] += values[index];
-        }
-        return Vec<T, _Size>(result);
-    }
-
-    template<typename T, size_t _Size>
-    Vec<T, _Size> Vec<T, _Size>::Scale(const Vec<T, _Size>& other) const {
-        if (Size != other.Size) {
-            throw VectorException(VectorError::SIZE_MISMATCH);
-        }
-        std::vector<T> result(this->values);
-        for (uint32_t index = 0; index < Size; index++) {
-            result[index] *= other[index];
-        }
-        return Vec<T, _Size>(result);
-    }
-
-    template<typename T, size_t _Size>
-    Vec<T, _Size> Vec<T, _Size>::Scale(T values...) const {
-        if (Size != sizeof(values) / sizeof(T)) {
-            throw VectorException(VectorError::SIZE_MISMATCH);
-        }
-        std::vector<T> result(this->values);
-        for (uint32_t index = 0; index < Size; index++) {
-            result[index] *= values[index];
-        }
-        return Vec<T, _Size>(result);
-    }
-
-    template<typename T, size_t _Size>
-    Vec<T, _Size> Vec<T, _Size>::Scale(T scalar) const {
-        std::vector<T> result(this->values);
-        for (uint32_t index = 0; index < Size; index++) {
-            result[index] *= scalar;
-        }
-        return Vec<T, _Size>(result);
-    }
-
-    template<typename T, size_t _Size>
-    Vec<T, _Size> Vec<T, _Size>::Normalize() const {
-        T dist = 0;
-        for (T value : values) {
-            dist += value * value;
-        }
-        dist = sqrt(dist);
-        std::vector<T> result(this->values);
-        for (uint32_t index = 0; index < Size; index++) {
-            result[index] /= dist;
-        }
-        return Vec<T, _Size>(result);
-    }
-
-
-    template<typename T, size_t _Size>
-    Vec<T, _Size> Vec<T, _Size>::Move(const Vec<T, _Size>& other) {
-        if (Size != other.Size) {
-            throw VectorException(VectorError::SIZE_MISMATCH);
-        }
-        for (uint32_t index = 0; index < Size; index++) {
-            this->values[index] += other[index];
-        }
-        return *this;
-    }
-
-    template<typename T, size_t _Size>
-    Vec<T, _Size> Vec<T, _Size>::Move(T values...) {
-        if (Size != sizeof(values) / sizeof(T)) {
-            throw VectorException(VectorError::SIZE_MISMATCH);
-        }
-        for (uint32_t index = 0; index < Size; index++) {
-            this->values[index] += values[index];
-        }
-        return *this;
-    }
-
-    template<typename T, size_t _Size>
-    Vec<T, _Size> Vec<T, _Size>::Scale(const Vec<T, _Size>& other) {
-        if (Size != other.Size) {
-            throw VectorException(VectorError::SIZE_MISMATCH);
-        }
-        for (uint32_t index = 0; index < Size; index++) {
-            this->values[index] *= other[index];
-        }
-        return *this;
-    }
-
-    template<typename T, size_t _Size>
-    Vec<T, _Size> Vec<T, _Size>::Scale(T values...) {
-        if (Size != sizeof(values) / sizeof(T)) {
-            throw VectorException(VectorError::SIZE_MISMATCH);
-        }
-        for (uint32_t index = 0; index < Size; index++) {
-            this->values[index] *= values[index];
-        }
-        return *this;
-    }
-
-    template<typename T, size_t _Size>
-    Vec<T, _Size> Vec<T, _Size>::Scale(T scalar) {
-        for (uint32_t index = 0; index < Size; index++) {
-            this->values[index] *= scalar;
-        }
-        return *this;
-    }
-
-    template<typename T, size_t _Size>
-    Vec<T, _Size> Vec<T, _Size>::Normalize() {
-        T dist = 0;
-        for (T value : values) {
-            dist += value * value;
-        }
-        dist = sqrt(dist);
-        for (T& value : values) {
-            value /= dist;
-        }
-        return *this;
-    }
-
-
-    template<typename T, size_t _Size>
-    Vec<T, _Size> Vec<T, _Size>::DirectionTo(const Vec<T, _Size>& other) const {
-        if (Size != other.Size) {
-            throw VectorException(VectorError::SIZE_MISMATCH);
-        }
-        std::vector<T> result(this->values);
-        for (uint32_t index = 0; index < Size; index++) {
-            result[index] = other[index] - values[index];
-        }
-        return Vec<T, _Size>(result);
-    }
-
-    template<typename T, size_t _Size>
-    T Vec<T, _Size>::DistanceTo(const Vec<T, _Size>& other) const {
-        if (Size != other.Size) {
-            throw VectorException(VectorError::SIZE_MISMATCH);
-        }
-        T distSqr = 0;
-        for (uint32_t index = 0; index < Size; index++) {
-            T difference = other[index] - values[index];
-            distSqr += difference * difference;
-        }
-        return sqrt(distSqr);
-    }
-
-    template<typename T, size_t _Size>
-    T Vec<T, _Size>::DistanceSqrTo(const Vec<T, _Size>& other) const {
-        if (Size != other.Size) {
-            throw VectorException(VectorError::SIZE_MISMATCH);
-        }
-        T distSqr = 0;
-        for (uint32_t index = 0; index < Size; index++) {
-            T difference = other[index] - values[index];
-            distSqr += difference * difference;
-        }
-        return distSqr;
-    }
 
 }

@@ -21,8 +21,6 @@ namespace Math {
             switch (error) {
             case VectorError::NORMALIZE_ZERO:
                 return "Cannot normalize the zero vector";
-            case VectorError::SIZE_MISMATCH:
-                return "Vector size mismatch";
             case VectorError::UNSPECIFIED:
             default:
                 return "Unspecified Vector Error";

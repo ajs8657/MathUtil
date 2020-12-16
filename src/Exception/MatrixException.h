@@ -19,7 +19,6 @@ namespace Math {
     private:
 
         std::string ErrorToString(const MatrixError& error) {
-
             switch (error) {
             case MatrixError::NOT_INVERTIBLE:
                 return "Matrix is not invertible";
