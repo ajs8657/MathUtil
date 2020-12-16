@@ -27,13 +27,13 @@ namespace Math {
         // Destructor
         ~Vec2() = default;
 
-        // Const Move by vector
-        Vec2<T> Move(const Vec2<T>& other) const {
+        // Const Add by vector
+        Vec2<T> Add(const Vec2<T>& other) const {
             return Vec2<T>(x + other.x, y + other.y);
         }
 
-        // Const Move by values
-        Vec2<T> Move(T dx, T dy) const {
+        // Const Add by values
+        Vec2<T> Add(T dx, T dy) const {
             return Vec2<T>(x + dx, y + dy);
         }
 
@@ -62,15 +62,15 @@ namespace Math {
         }
 
 
-        // Mutator Move by vector
-        Vec2<T> Move(const Vec2<T>& other) {
+        // Mutator Add by vector
+        Vec2<T> Add(const Vec2<T>& other) {
             x += other.x;
             y += other.y;
             return *this;
         }
 
-        // Mutator Move by values
-        Vec2<T> Move(T dx, T dy) {
+        // Mutator Add by values
+        Vec2<T> Add(T dx, T dy) {
             x += dx;
             y += dy;
             return *this;

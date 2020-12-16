@@ -32,8 +32,8 @@ namespace Math {
         // Destructor
         ~Vec() = default;
 
-        // Const Move by vector
-        Vec<T, Size> Move(const Vec<T, Size>& other) const {
+        // Const Add by vector
+        Vec<T, Size> Add(const Vec<T, Size>& other) const {
             std::vector<T> result(this->values);
             for (uint32_t index = 0; index < Size; index++) {
                 result[index] += other[index];
@@ -41,8 +41,8 @@ namespace Math {
             return Vec<T, Size>(result);
         }
 
-        // Const Move by values
-        Vec<T, Size> Move(T values...) const {
+        // Const Add by values
+        Vec<T, Size> Add(T values...) const {
             std::vector<T> result(this->values);
             for (uint32_t index = 0; index < Size; index++) {
                 result[index] += values[index];
@@ -95,16 +95,16 @@ namespace Math {
         }
 
 
-        // Mutator Move by vector
-        Vec<T, Size> Move(const Vec<T, Size>& other) {
+        // Mutator Add by vector
+        Vec<T, Size> Add(const Vec<T, Size>& other) {
             for (uint32_t index = 0; index < Size; index++) {
                 this->values[index] += other[index];
             }
             return *this;
         }
 
-        // Mutator Move by values
-        Vec<T, Size> Move(T values...) {
+        // Mutator Add by values
+        Vec<T, Size> Add(T values...) {
             for (uint32_t index = 0; index < Size; index++) {
                 this->values[index] += values[index];
             }
