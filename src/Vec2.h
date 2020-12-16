@@ -10,7 +10,7 @@ namespace Math {
 
     public:
 
-        static const Vec2<T> Origin = Vec2<T>(0, 0);
+        static const Vec2 Origin;
 
         // Empty constructor
         Vec2() = delete;
@@ -70,7 +70,7 @@ namespace Math {
         }
 
         // Mutator Move by values
-        Vec2<T> Move(T x, T y) {
+        Vec2<T> Move(T dx, T dy) {
             x += dx;
             y += dy;
             return *this;
@@ -150,5 +150,8 @@ namespace Math {
         T x, y;
 
     };
+
+    template<typename T>
+    const Vec2<T> Vec2<T>::Origin(0, 0);
 
 }

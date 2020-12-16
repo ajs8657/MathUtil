@@ -10,7 +10,7 @@ namespace Math {
 
     public:
 
-        static const Vec3<T> Origin = Vec3<T>(0, 0, 0);
+        static const Vec3 Origin;
 
         // Empty constructor
         Vec3() = delete;
@@ -162,5 +162,8 @@ namespace Math {
         T x, y, z;
 
     };
+
+    template<typename T>
+    const Vec3<T> Vec3<T>::Origin(0, 0, 0);
 
 }
