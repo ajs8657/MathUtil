@@ -141,9 +141,9 @@ namespace Math {
             return dx * dx + dy * dy;
         }
 
-        inline T GetX() { return x; }
+        inline T GetX() const { return x; }
 
-        inline T GetY() { return y; }
+        inline T GetY() const { return y; }
 
     private:
 

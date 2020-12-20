@@ -190,7 +190,7 @@ namespace Math {
             return distSqr;
         }
 
-        inline T operator[] (int index) { return values[index]; }
+        inline T operator[] (int index) const { return values[index]; }
 
     private:
 

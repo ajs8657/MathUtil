@@ -151,11 +151,11 @@ namespace Math {
             return dx * dx + dy * dy + dz * dz;
         }
 
-        inline T GetX() { return x; }
+        inline T GetX() const { return x; }
 
-        inline T GetY() { return y; }
+        inline T GetY() const { return y; }
 
-        inline T GetZ() { return z; }
+        inline T GetZ() const { return z; }
 
     private:
 
