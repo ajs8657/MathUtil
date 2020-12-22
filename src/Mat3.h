@@ -154,6 +154,15 @@ namespace Math {
                 ((d * h - e * g) * xOverDet) + ((b * g - a * h) * yOverDet) + ((a * e - b * d) * zOverDet));
         }
 
+        // Overload stream insertion for pretty printing
+        inline friend std::ostream& operator<<(
+            std::ostream& stream, const Mat2<T>& mat) const {
+            stream << "{{" << a << ", " << b << ", " << c << "}, "
+                << "{" << d << ", " << e << ", " << f << "}, "
+                << "{" << g << ", " << h << ", " << i << "}}";
+            return stream;
+        }
+
     private:
 
         T a, b, c, d, e, f, g, h, i;

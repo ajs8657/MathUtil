@@ -5,6 +5,7 @@ cmake_minimum_required (VERSION 3.8)
 
 # Project Name
 project("MathUtil")
+set(CMAKE_CXX_STANDARD 17)
 
 # Create a list of source files
 set(SRC_DIR "src")

@@ -190,6 +190,18 @@ namespace Math {
             return distSqr;
         }
 
+        // Overload stream insertion for pretty printing
+        inline friend std::ostream& operator<<(
+            std::ostream& stream, const Vec<T>& vec) const {
+            stream << "(";
+            for (uint32_t index = 0; index < Size - 1; index++) {
+                stream << values[index] << ", ";
+            }
+            stream << values[Size - 1] << ")";
+            return stream;
+        }
+
+        // Similar to Get*() methods, but takes an index instead
         inline T operator[] (int index) const { return values[index]; }
 
     private:

@@ -151,6 +151,15 @@ namespace Math {
             return dx * dx + dy * dy + dz * dz;
         }
 
+        // Overload stream insertion for pretty printing
+        inline friend std::ostream& operator<<(
+            std::ostream& stream, const Vec3& vec) const {
+            stream << "(" << v.GetX() << ", "
+                << v.GetY() << ", " <<
+                v.GetZ() << ")";
+            return stream;
+        }
+
         inline T GetX() const { return x; }
 
         inline T GetY() const { return y; }

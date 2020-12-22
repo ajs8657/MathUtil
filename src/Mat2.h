@@ -117,6 +117,14 @@ namespace Math {
                 a * yOverDet - c * xOverDet);
         }
 
+        // Overload stream insertion for pretty printing
+        inline friend std::ostream& operator<<(
+            std::ostream& stream, const Mat2<T>& mat) const {
+            stream << "{{" << a << ", " << b << "}, "
+                << "{" << c << ", " << d << "}}";
+            return stream;
+        }
+
     private:
 
         T a, b, c, d;
