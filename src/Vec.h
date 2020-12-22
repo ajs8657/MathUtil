@@ -192,7 +192,7 @@ namespace Math {
 
         // Overload stream insertion for pretty printing
         inline friend std::ostream& operator<<(
-            std::ostream& stream, const Vec<T>& vec) const {
+            std::ostream& stream, const Vec<T>& vec) {
             stream << "(";
             for (uint32_t index = 0; index < Size - 1; index++) {
                 stream << vec.values[index] << ", ";

@@ -153,7 +153,7 @@ namespace Math {
 
         // Overload stream insertion for pretty printing
         inline friend std::ostream& operator<<(
-            std::ostream& stream, const Vec3& vec) const {
+            std::ostream& stream, const Vec3& vec) {
             stream << "(" << vec.x << ", "
                 << vec.y << ", "
                 << vec.z << ")";
