@@ -154,9 +154,9 @@ namespace Math {
         // Overload stream insertion for pretty printing
         inline friend std::ostream& operator<<(
             std::ostream& stream, const Vec3& vec) const {
-            stream << "(" << v.GetX() << ", "
-                << v.GetY() << ", " <<
-                v.GetZ() << ")";
+            stream << "(" << vec.x << ", "
+                << vec.y << ", "
+                << vec.z << ")";
             return stream;
         }
 

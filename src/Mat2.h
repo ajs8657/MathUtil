@@ -120,8 +120,8 @@ namespace Math {
         // Overload stream insertion for pretty printing
         inline friend std::ostream& operator<<(
             std::ostream& stream, const Mat2<T>& mat) const {
-            stream << "{{" << a << ", " << b << "}, "
-                << "{" << c << ", " << d << "}}";
+            stream << "{{" << mat.a << ", " << mat.b << "}, "
+                << "{" << mat.c << ", " << mat.d << "}}";
             return stream;
         }
 

@@ -195,9 +195,9 @@ namespace Math {
             std::ostream& stream, const Vec<T>& vec) const {
             stream << "(";
             for (uint32_t index = 0; index < Size - 1; index++) {
-                stream << values[index] << ", ";
+                stream << vec.values[index] << ", ";
             }
-            stream << values[Size - 1] << ")";
+            stream << vec.values[Size - 1] << ")";
             return stream;
         }
 
