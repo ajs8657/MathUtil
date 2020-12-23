@@ -1,10 +1,12 @@
 #pragma once
 
 #include "Exception/VectorException.h"
+
 #include <array>
 #include <cmath>
 #include <initializer_list>
 #include <memory>
+#include <ostream>
 #include <vector>
 
 namespace Math {

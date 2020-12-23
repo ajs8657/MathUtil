@@ -1,7 +1,9 @@
 #pragma once
 
-#include "Vec3.h"
 #include "Exception/MatrixException.h"
+#include "Vec3.h"
+
+#include <ostream>
 
 namespace Math {
 

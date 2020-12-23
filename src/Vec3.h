@@ -1,7 +1,9 @@
 #pragma once
 
 #include "Exception/VectorException.h"
+
 #include <cmath>
+#include <ostream>
 
 namespace Math {
 
