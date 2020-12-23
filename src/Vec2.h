@@ -29,6 +29,12 @@ namespace Math {
         // Destructor
         ~Vec2() = default;
 
+        // Copy assignment
+        Vec2 operator=(const Vec2& other) = default;
+
+        // Move assignment
+        Vec2& operator=(Vec2&& other) = default;
+
         // Const Add by vector
         Vec2<T> Add(const Vec2<T>& other) const {
             return Vec2<T>(x + other.x, y + other.y);

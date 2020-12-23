@@ -29,6 +29,11 @@ namespace Math {
         // Destructor
         ~Mat2() = default;
 
+        // Copy assignment
+        Mat2 operator=(const Mat2& other) = default;
+
+        // Move assignment
+        Mat2& operator=(Mat2&& other) = default;
 
         // Const Multiply by other 2x2 Matrix
         Mat2<T> Multiply(const Mat2<T>& other) const {

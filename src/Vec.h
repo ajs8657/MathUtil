@@ -34,6 +34,12 @@ namespace Math {
         // Destructor
         ~Vec() = default;
 
+        // Copy assignment
+        Vec operator=(const Vec& other) = default;
+
+        // Move assignment
+        Vec& operator=(Vec&& other) = default;
+
         // Const Add by vector
         Vec<T, Size> Add(const Vec<T, Size>& other) const {
             std::vector<T> result(this->values);
