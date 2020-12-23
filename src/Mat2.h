@@ -30,7 +30,7 @@ namespace Math {
         ~Mat2() = default;
 
         // Copy assignment
-        Mat2 operator=(const Mat2& other) = default;
+        Mat2& operator=(const Mat2& other) = default;
 
         // Move assignment
         Mat2& operator=(Mat2&& other) = default;

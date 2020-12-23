@@ -39,7 +39,7 @@ namespace Math {
         ~Mat3() = default;
 
         // Copy assignment
-        Mat3 operator=(const Mat3& other) = default;
+        Mat3& operator=(const Mat3& other) = default;
 
         // Move assignment
         Mat3& operator=(Mat3&& other) = default;

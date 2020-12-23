@@ -30,7 +30,7 @@ namespace Math {
         ~Vec3() = default;
 
         // Copy assignment
-        Vec3 operator=(const Vec3& other) = default;
+        Vec3& operator=(const Vec3& other) = default;
 
         // Move assignment
         Vec3& operator=(Vec3&& other) = default;

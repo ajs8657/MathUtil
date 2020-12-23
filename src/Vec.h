@@ -35,7 +35,7 @@ namespace Math {
         ~Vec() = default;
 
         // Copy assignment
-        Vec operator=(const Vec& other) = default;
+        Vec& operator=(const Vec& other) = default;
 
         // Move assignment
         Vec& operator=(Vec&& other) = default;
